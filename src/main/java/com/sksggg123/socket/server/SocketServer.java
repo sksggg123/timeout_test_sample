@@ -49,15 +49,21 @@ public class SocketServer {
         } finally {
             try {
                 server.close();
+                System.out.println("[서버] Server closed...");
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             try {
+                System.out.println("[서버] Socket closed...");
                 socket.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            new SocketServer();
+            System.out.println("[서버] 대기 상태 재진입");
+
         }
     }
 
@@ -74,7 +80,7 @@ public class SocketServer {
             }
         } else {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -46,6 +46,7 @@ public class Client {
         } finally {
             try {
                 socket.close();
+                System.out.println("[클라이언트] Socket closed...");
             } catch (IOException e) {
                 e.printStackTrace();
             }
