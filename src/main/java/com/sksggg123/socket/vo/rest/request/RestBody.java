@@ -1,4 +1,4 @@
-package com.sksggg123.socket.vo.rest;
+package com.sksggg123.socket.vo.rest.request;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,31 +13,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  * | blog         : sksggg123.github.io     |
  * ------------------------------------------
  * project      : socket
- * create date  : 2019-09-10 15:57
+ * create date  : 2019-09-10 15:59
  */
-@XmlRootElement(name = "HEADER")
+@XmlRootElement(name = "BODY")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RestHeader {
+public class RestBody {
 
-    @XmlElement(name = "RESULT")
-    private String result;
+    @XmlElement(name = "ID")
+    private String id;
 
-    @XmlElement(name = "RESULT_CODE")
-    private int resultCode;
+    @XmlElement(name = "NAME")
+    private String name;
 
-    public String getResult() {
-        return result;
+    public String getId() {
+        return id;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public int getResultCode() {
-        return resultCode;
+    public String getName() {
+        return name;
     }
 
-    public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
+    public void setName(String name) {
+        this.name = name;
     }
 }

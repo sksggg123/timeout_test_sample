@@ -1,6 +1,6 @@
 package com.sksggg123.socket.service;
 
-import com.sksggg123.socket.vo.rest.RestVO;
+import com.sksggg123.socket.vo.rest.request.RestVO;
 import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;

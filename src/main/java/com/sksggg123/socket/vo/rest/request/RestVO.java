@@ -1,4 +1,4 @@
-package com.sksggg123.socket.vo.rest;
+package com.sksggg123.socket.vo.rest.request;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.annotation.*;

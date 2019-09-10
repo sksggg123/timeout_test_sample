@@ -2,7 +2,7 @@ package com.sksggg123.socket.controller;
 
 import com.sksggg123.socket.client.Client;
 import com.sksggg123.socket.service.RestRequestService;
-import com.sksggg123.socket.vo.rest.RestVO;
+import com.sksggg123.socket.vo.rest.request.RestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * create date  : 2019-09-10 10:15
  */
 @RestController
-@RequestMapping(value = "/socket")
+@RequestMapping(value = "/provide")
 public class ProvideController {
 
     @Autowired
