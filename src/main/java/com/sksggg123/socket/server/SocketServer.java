@@ -62,8 +62,6 @@ public class SocketServer {
             }
 
             new SocketServer();
-            System.out.println("[서버] 대기 상태 재진입");
-
         }
     }
 
