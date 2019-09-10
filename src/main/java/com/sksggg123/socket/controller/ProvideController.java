@@ -36,11 +36,9 @@ public class ProvideController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
     String requestXML(@PathVariable(value = "id") String id) {
-
-        RestVO vo = new RestVO()
-                .builder(HttpServletResponse.SC_OK)
-                .builder(id, "권병윤");
-
-        return restRequestService.convertToXmlString(vo);
+        return restRequestService.convertToXmlString(
+                new RestVO()
+                        .builder(HttpServletResponse.SC_OK)
+                        .builder(id, "권병윤"));
     }
 }
