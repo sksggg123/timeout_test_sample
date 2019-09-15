@@ -1,6 +1,5 @@
 package com.sksggg123.socket.controller;
 
-import com.sksggg123.socket.client.Client;
 import com.sksggg123.socket.service.RestRequestService;
 import com.sksggg123.socket.vo.rest.request.RestVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,6 @@ public class ProvideController {
 
     @Autowired
     private RestRequestService restRequestService;
-
-    @RequestMapping(value = "", method = RequestMethod.GET)
-    public String main(@RequestParam(value = "sendData") final String sendData) {
-        System.out.println("소켓 연결 시도 중 {}" + sendData);
-        new Client("localhost", 30089, sendData);
-
-        return "main";
-    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody

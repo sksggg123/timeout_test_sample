@@ -24,6 +24,11 @@ public class SocketServer {
     private BufferedReader in;
     private PrintWriter out;
 
+    private static final String OWNER = "KWON";
+    private static final String EMPTY_MESSAGE = "Request Data is Empty..!\n Please Retry";
+    private static final String RETURN_OWNER_MESSAGE = "%s is Owner";
+    private static final String RETURN_CLIENT_MESSAGE = "%s is Client";
+
     public SocketServer() {
         try {
             server = new ServerSocket(30089);
@@ -41,7 +46,7 @@ public class SocketServer {
 
             out = new PrintWriter(socket.getOutputStream());
             System.out.println("[서버] 클라이언트로 보낼 데이터");
-            out.println("데이터 보냅니다.");
+            out.println(makeResponseData(input));
             out.flush();
 
         } catch (IOException e) {
@@ -84,5 +89,21 @@ public class SocketServer {
             }
         }
 
+    }
+
+    private String makeResponseData(String input) {
+        if ("".equals(input) || input == null) {
+            return EMPTY_MESSAGE;
+        }
+
+        if (isOwner(input)) {
+            return String.format(RETURN_OWNER_MESSAGE, input);
+        }
+
+        return String.format(RETURN_CLIENT_MESSAGE, input);
+    }
+
+    private boolean isOwner(String input) {
+        return OWNER.equalsIgnoreCase(input);
     }
 }

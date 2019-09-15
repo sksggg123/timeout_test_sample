@@ -22,34 +22,53 @@ public class Client {
     private BufferedReader in;
     private PrintWriter out;
 
-    public Client(String ip, int port, String sendData) {
+    private static final String CLOSE_MESSAGE = "[클라이언트] Socket closed... {%s}";
+    private static final String RETRY_MESSAGE = "Please Rerty..";
+
+    public String responseData(String data) {
         try {
-            socket = new Socket(ip, port);
-            socket.setKeepAlive(Boolean.TRUE);
-            socket.setSoTimeout(2000);
-
-            System.out.println("[클라이언트] 서버와 연결 성공");
-
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            System.out.println("[클라이언트] 서버와의 데이터 전달연결 통로 구축 {InputStream}");
-
-            out = new PrintWriter(socket.getOutputStream());
-            System.out.println("[클라이언트] 서버와의 데이터 전달연결 통로 구축 {OutputStream}");
-
-            out.println(sendData);
-            out.flush();
-
-            System.out.println(in.readLine());
-
+            connect("localhost", 30089, data);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                socket.close();
-                System.out.println("[클라이언트] Socket closed...");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            close("Connection Error");
+            return RETRY_MESSAGE;
+        }
+
+        try {
+            out.println(data);
+            out.flush();
+            String responseData = in.readLine();
+
+            close("Success Closed");
+            return responseData;
+        } catch (IOException e) {
+
+            e.printStackTrace();
+            close("Read IO Error");
+            return RETRY_MESSAGE;
+        }
+    }
+
+    private void connect(String ip, int port, String data) throws IOException {
+        socket = new Socket(ip, port);
+        socket.setKeepAlive(Boolean.TRUE);
+        socket.setSoTimeout(2000);
+
+        System.out.println("[클라이언트] 서버와 연결 성공");
+
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        System.out.println("[클라이언트] 서버와의 데이터 전달연결 통로 구축 {InputStream}");
+
+        out = new PrintWriter(socket.getOutputStream());
+        System.out.println("[클라이언트] 서버와의 데이터 전달연결 통로 구축 {OutputStream}");
+    }
+
+    private void close(String message) {
+        try {
+            socket.close();
+            System.out.println(String.format(CLOSE_MESSAGE, message));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
