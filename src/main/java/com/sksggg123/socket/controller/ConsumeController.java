@@ -2,6 +2,7 @@ package com.sksggg123.socket.controller;
 
 import com.sksggg123.socket.client.Client;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * author       : gwonbyeong-yun <sksggg123>
@@ -19,9 +20,17 @@ public class ConsumeController {
 
     @RequestMapping(value = "/socket/{data}", method = RequestMethod.GET)
     public @ResponseBody
-    String main(@PathVariable(value = "data") final String data) {
+    String socket(@PathVariable(value = "data") final String data) {
         System.out.println("소켓 연결 시도 중...");
+
         Client client = new Client();
         return client.responseData(data);
+    }
+
+    @RequestMapping(value = "/rest/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    String getXmlType(@PathVariable(value = "id") final String id) {
+        RestTemplate rest = new RestTemplate();
+        return "";
     }
 }
