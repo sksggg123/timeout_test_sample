@@ -1,6 +1,6 @@
 package com.sksggg123.socket.controller;
 
-import com.sksggg123.socket.client.Client;
+import com.sksggg123.socket.client.SocketClientRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -23,8 +23,8 @@ public class ConsumeController {
     String socket(@PathVariable(value = "data") final String data) {
         System.out.println("소켓 연결 시도 중...");
 
-        Client client = new Client();
-        return client.responseData(data);
+        SocketClientRequest socketClientRequest = new SocketClientRequest();
+        return socketClientRequest.responseData(data);
     }
 
     @RequestMapping(value = "/rest/{id}", method = RequestMethod.GET)

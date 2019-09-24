@@ -27,7 +27,7 @@ public class SocketServer {
     private static final String OWNER = "KWON";
     private static final String EMPTY_MESSAGE = "Request Data is Empty..!\n Please Retry";
     private static final String RETURN_OWNER_MESSAGE = "%s is Owner";
-    private static final String RETURN_CLIENT_MESSAGE = "%s is Client";
+    private static final String RETURN_CLIENT_MESSAGE = "%s is SocketClientRequest";
 
     public SocketServer() {
         try {

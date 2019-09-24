@@ -16,7 +16,7 @@ import java.net.Socket;
  * project      : socket
  * create date  : 2019-09-10 10:54
  */
-public class Client {
+public class SocketClientRequest {
     private Socket socket;
 
     private BufferedReader in;
@@ -27,7 +27,7 @@ public class Client {
 
     public String responseData(String data) {
         try {
-            connect("localhost", 30089, data);
+            connect("localhost", 30089);
         } catch (IOException e) {
             e.printStackTrace();
             close("Connection Error");
@@ -49,7 +49,7 @@ public class Client {
         }
     }
 
-    private void connect(String ip, int port, String data) throws IOException {
+    private void connect(String ip, int port) throws IOException {
         socket = new Socket(ip, port);
         socket.setKeepAlive(Boolean.TRUE);
         socket.setSoTimeout(2000);
