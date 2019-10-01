@@ -1,6 +1,7 @@
 package com.sksggg123.socket.controller;
 
 import com.sksggg123.socket.service.RestRequestService;
+import com.sksggg123.socket.utils.ThreadTimeUtils;
 import com.sksggg123.socket.vo.rest.request.RestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,8 @@ public class ProvideController {
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/xml")
     public @ResponseBody
     String requestXML(@PathVariable(value = "id") String id) {
+        ThreadTimeUtils.wait(ThreadTimeUtils.isWait(id));
+
         return restRequestService.convertToXmlString(
                 new RestVO()
                         .builder(HttpServletResponse.SC_OK)

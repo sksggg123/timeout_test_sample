@@ -1,5 +1,7 @@
 package com.sksggg123.socket.server;
 
+import com.sksggg123.socket.utils.ThreadTimeUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,77 +20,37 @@ import java.net.Socket;
  * create date  : 2019-09-10 10:22
  */
 public class SocketServer {
-    private ServerSocket server;
-    private Socket socket;
-
-    private BufferedReader in;
-    private PrintWriter out;
-
+    public static final int PORT = 30089;
     private static final String OWNER = "KWON";
     private static final String EMPTY_MESSAGE = "Request Data is Empty..!\n Please Retry";
     private static final String RETURN_OWNER_MESSAGE = "%s is Owner";
     private static final String RETURN_CLIENT_MESSAGE = "%s is SocketClientRequest";
 
+
     public SocketServer() {
-        try {
-            server = new ServerSocket(30089);
+        try (ServerSocket server = new ServerSocket(PORT)) {
             System.out.println("[서버] 대기 상태");
 
-            socket = server.accept();
-            System.out.println("[서버] 클라이언트 요청 수신");
+            Socket socket = null;
+            while((socket = server.accept()) != null) {
+                System.out.println("[서버] 클라이언트 요청 수신");
 
-            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            String input = in.readLine();
-            System.out.println("[서버] 클라이언트 요청 데이터 : " + input);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                String input = in.readLine();
+                System.out.println("[서버] 클라이언트 요청 데이터 : " + input);
 
-            boolean flag = isWait(input);
-            wait(flag);
+                boolean flag = ThreadTimeUtils.isWait(input);
+                ThreadTimeUtils.wait(flag);
 
-            out = new PrintWriter(socket.getOutputStream());
-            System.out.println("[서버] 클라이언트로 보낼 데이터");
-            out.println(makeResponseData(input));
-            out.flush();
+                PrintWriter out = new PrintWriter(socket.getOutputStream());
+                out.println(makeResponseData(input));
+                out.flush();
+                System.out.println("[서버] 응답완료!");
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                server.close();
-                System.out.println("[서버] Server closed...");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                System.out.println("[서버] Socket closed...");
-                socket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            new SocketServer();
         }
-    }
-
-    private Boolean isWait(String input) {
-        return input.equals("wait") ? Boolean.TRUE : Boolean.FALSE;
-    }
-
-    private void wait(boolean flag) {
-        if (flag) {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
     }
 
     private String makeResponseData(String input) {

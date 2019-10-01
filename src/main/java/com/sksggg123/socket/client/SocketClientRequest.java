@@ -1,5 +1,7 @@
 package com.sksggg123.socket.client;
 
+import com.sksggg123.socket.server.SocketServer;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,12 +24,14 @@ public class SocketClientRequest {
     private BufferedReader in;
     private PrintWriter out;
 
-    private static final String CLOSE_MESSAGE = "[클라이언트] Socket closed... {%s}";
+    private static final String CLOSE_MESSAGE = "[클라이언트] %s...";
     private static final String RETRY_MESSAGE = "Please Rerty..";
+    private static final String LOCALHOST = "localhost";
+    private static final int TIME_OUT = 2000;
 
     public String responseData(String data) {
         try {
-            connect("localhost", 30089);
+            connect(LOCALHOST, SocketServer.PORT);
         } catch (IOException e) {
             e.printStackTrace();
             close("Connection Error");
@@ -52,7 +56,7 @@ public class SocketClientRequest {
     private void connect(String ip, int port) throws IOException {
         socket = new Socket(ip, port);
         socket.setKeepAlive(Boolean.TRUE);
-        socket.setSoTimeout(2000);
+        socket.setSoTimeout(TIME_OUT);
 
         System.out.println("[클라이언트] 서버와 연결 성공");
 
