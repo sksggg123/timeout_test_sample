@@ -40,4 +40,12 @@ public class RestHeader {
     public void setResultCode(int resultCode) {
         this.resultCode = resultCode;
     }
+
+    @Override
+    public String toString() {
+        return "RestHeader{" +
+                "result='" + result + '\'' +
+                ", resultCode=" + resultCode +
+                '}';
+    }
 }

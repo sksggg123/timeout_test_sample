@@ -24,7 +24,7 @@ public class ProvideController {
     @Autowired
     private RestRequestService restRequestService;
 
-    @RequestMapping(value = "/{id}", method = {RequestMethod.GET}, produces = "application/xml")
+    @RequestMapping(value = "/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/xml")
     public @ResponseBody
     String requestXML(@PathVariable(value = "id") String id) {
         return restRequestService.convertToXmlString(

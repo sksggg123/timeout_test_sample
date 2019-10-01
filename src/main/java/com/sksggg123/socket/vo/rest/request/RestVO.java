@@ -52,4 +52,20 @@ public class RestVO {
         body.setName("anonymous");
         return this;
     }
+
+    public RestHeader getHeader() {
+        return header;
+    }
+
+    public RestBody getBody() {
+        return body;
+    }
+
+    @Override
+    public String toString() {
+        return "RestVO{" +
+                "header=" + header +
+                ", body=" + body +
+                '}';
+    }
 }
