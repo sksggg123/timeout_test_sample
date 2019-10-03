@@ -28,6 +28,7 @@ public class ProvideController {
     @RequestMapping(value = "/{id}", method = {RequestMethod.GET, RequestMethod.POST}, produces = "application/xml")
     public @ResponseBody
     String requestXML(@PathVariable(value = "id") String id) {
+        System.out.println("[서버] 데이터 요청 " + id);
         ThreadTimeUtils.wait(ThreadTimeUtils.isWait(id));
 
         return restRequestService.convertToXmlString(
