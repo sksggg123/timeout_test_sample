@@ -1,4 +1,4 @@
-package com.sksggg123.socket.service;
+package com.sksggg123.socket.utils;
 
 import com.sksggg123.socket.vo.rest.request.RestVO;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.io.StringWriter;
  */
 
 @Service
-public class RestRequestService {
+public class ConvertUtil {
 
     public String convertToXmlString(RestVO vo) {
         StringWriter writer = new StringWriter();

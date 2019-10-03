@@ -27,7 +27,7 @@ public class SocketClientRequest {
     private static final String CLOSE_MESSAGE = "[클라이언트] %s...";
     private static final String RETRY_MESSAGE = "Please Rerty..";
     private static final String LOCALHOST = "localhost";
-    private static final int TIME_OUT = 2000;
+    private static final int TIME_OUT = 2_000;
 
     public String responseData(String data) {
         try {

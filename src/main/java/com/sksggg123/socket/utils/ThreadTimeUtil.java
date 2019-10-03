@@ -10,7 +10,7 @@ package com.sksggg123.socket.utils;
  * project      : socket
  * create date  : 2019-10-02 00:07
  */
-public class ThreadTimeUtils {
+public class ThreadTimeUtil {
     private static final int THREAD_SLEEP_5 = 5_000;
     private static final int THREAD_SLEEP_1 = 1_000;
 

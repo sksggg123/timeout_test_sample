@@ -1,6 +1,6 @@
 package com.sksggg123.socket.server;
 
-import com.sksggg123.socket.utils.ThreadTimeUtils;
+import com.sksggg123.socket.utils.ThreadTimeUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,8 +39,8 @@ public class SocketServer {
                 String input = in.readLine();
                 System.out.println("[서버] 클라이언트 요청 데이터 : " + input);
 
-                boolean flag = ThreadTimeUtils.isWait(input);
-                ThreadTimeUtils.wait(flag);
+                boolean flag = ThreadTimeUtil.isWait(input);
+                ThreadTimeUtil.wait(flag);
 
                 PrintWriter out = new PrintWriter(socket.getOutputStream());
                 out.println(makeResponseData(input));
